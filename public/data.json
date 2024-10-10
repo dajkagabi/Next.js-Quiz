@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "question": "Mi a Next.js fő célja?",
+    "answers": [
+      "A React alkalmazások könnyebb építése és optimalizálása",
+      "Csak statikus weboldalak létrehozása",
+      "Webszerverek konfigurálása",
+      "Csak API fejlesztés"
+    ],
+    "correct": "A React alkalmazások könnyebb építése és optimalizálása"
+  },
+  {
+    "id": 2,
+    "question": "Melyik következő funkció NEM része a Next.js-nek?",
+    "answers": [
+      "Server-side rendering",
+      "Static site generation",
+      "Client-side routing",
+      "Desktop alkalmazás támogatás"
+    ],
+    "correct": "Desktop alkalmazás támogatás"
+  },
+  {
+    "id": 3,
+    "question": "Mi a Next.js Pages könyvtár szerepe?",
+    "answers": [
+      "CSS fájlok tárolása",
+      "Útvonalak automatikus generálása a fájlnevek alapján",
+      "Stíluslapok kezelése",
+      "Képek tárolása"
+    ],
+    "correct": "Útvonalak automatikus generálása a fájlnevek alapján"
+  },
+  {
+    "id": 4,
+    "question": "Melyik metódus használható adatok előzetes lekérésére a Next.js statikus generálása során?",
+    "answers": [
+      "getServerSideProps()",
+      "getStaticProps()",
+      "getInitialProps()",
+      "useEffect()"
+    ],
+    "correct": "getStaticProps()"
+  },
+  {
+    "id": 5,
+    "question": "Mi a különbség a getStaticProps() és a getServerSideProps() között?",
+    "answers": [
+      "A getStaticProps a build idő alatt fut, míg a getServerSideProps minden kéréskor fut",
+      "A getServerSideProps csak statikus oldalakat hoz létre",
+      "Nincs különbség közöttük",
+      "A getStaticProps csak a frontendhez kapcsolódik"
+    ],
+    "correct": "A getStaticProps a build idő alatt fut, míg a getServerSideProps minden kéréskor fut"
+  },
+  {
+    "id": 6,
+    "question": "Mi a dynamic routing a Next.js-ben?",
+    "answers": [
+      "Az útvonalak dinamikus generálása URL paraméterek alapján",
+      "Statikus útvonalak létrehozása",
+      "A CSS dinamikus betöltése",
+      "Adatok dinamikus megjelenítése"
+    ],
+    "correct": "Az útvonalak dinamikus generálása URL paraméterek alapján"
+  },
+  {
+    "id": 7,
+    "question": "Mire használható a Link komponens a Next.js-ben?",
+    "answers": [
+      "Stíluslapok importálására",
+      "API hívások végrehajtására",
+      "Navigációs hivatkozások létrehozására",
+      "Webszerverek beállítására"
+    ],
+    "correct": "Navigációs hivatkozások létrehozására"
+  },
+  {
+    "id": 8,
+    "question": "Hogyan valósítható meg a statikus generálás a Next.js-ben?",
+    "answers": [
+      "getStaticProps() és getStaticPaths() metódusok használatával",
+      "Csak getServerSideProps() metódussal",
+      "useEffect() metódussal",
+      "Nincs szükség külön metódusra"
+    ],
+    "correct": "getStaticProps() és getStaticPaths() metódusok használatával"
+  },
+  {
+    "id": 9,
+    "question": "Melyik lehetőség segít a SEO optimalizálásában a Next.js-ben?",
+    "answers": [
+      "Server-side rendering",
+      "Client-side rendering",
+      "Static rendering",
+      "Mindezeket"
+    ],
+    "correct": "Mindezeket"
+  },
+  {
+    "id": 10,
+    "question": "Miként lehet kezelni a globális stílusokat a Next.js-ben?",
+    "answers": [
+      "A _app.js fájlban importálva",
+      "Csak a pages könyvtárban",
+      "Kizárólag CSS modulok használatával",
+      "Nincs lehetőség globális stílusok használatára"
+    ],
+    "correct": "A _app.js fájlban importálva"
+  }
+]

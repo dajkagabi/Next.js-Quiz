@@ -1,95 +1,80 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import { useState, useEffect } from 'react';
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [questions, setQuestions] = useState([]);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [score, setScore] = useState(0);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [feedback, setFeedback] = useState('');
+  const [feedbackClass, setFeedbackClass] = useState('');
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+  useEffect(() => {
+    // Load questions from the JSON file
+    fetch('/data.json')
+      .then((res) => res.json())
+      .then((data) => setQuestions(data));
+  }, []);
+
+  const handleAnswerClick = (selectedAnswer) => {
+    const correctAnswer = questions[currentQuestion].correct;
+
+    if (selectedAnswer === correctAnswer) {
+      setScore(score + 1);
+      setFeedback('Helyes!');
+      setFeedbackClass('correct'); // Zöld szín
+    } else {
+      setFeedback(`Helytelen! A helyes válasz: ${correctAnswer}`);
+      setFeedbackClass('incorrect'); // Piros szín
+    }
+
+    setShowFeedback(true);
+
+    // Move to the next question after 2 seconds
+    setTimeout(() => {
+      setCurrentQuestion(currentQuestion + 1);
+      setShowFeedback(false);
+      setFeedback(''); // Clear feedback for next question
+    }, 2000);
+  };
+
+  const handleRestart = () => {
+    setCurrentQuestion(0);
+    setScore(0);
+    setShowFeedback(false);
+    setFeedback('');
+  };
+
+  if (questions.length === 0) return <div>Betöltés...</div>;
+
+  if (currentQuestion >= questions.length) {
+    return (
+      <div className="score">
+        <p>A pontszámod: {score}/{questions.length}</p>
+        <button className="restart-button" onClick={handleRestart}>
+          Újra kezdés
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+     
+      <h2>{questions[currentQuestion].question}</h2>
+
+      {questions[currentQuestion].answers.map((answer, index) => (
+        <button
+          key={index}
+          onClick={() => handleAnswerClick(answer)}
+          disabled={showFeedback} // Disable buttons while showing feedback
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          {answer}
+        </button>
+      ))}
+
+      {showFeedback && <p className={`feedback ${feedbackClass}`}>{feedback}</p>}
     </div>
   );
 }
